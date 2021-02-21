@@ -16,6 +16,7 @@
     <mvc:resources location="/ztree/" mapping="/ztree/**"/>
     <mvc:view-controller path="/admin/to/login/page" view-name="admin-login"/>
     <mvc:view-controller path="/admin/to/main/pape" view-name="admin-main"/>
+<!--    <mvc:view-controller path="/admin/get/page" view-name="admin-page"/>-->
 <!--    注册拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>

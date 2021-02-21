@@ -1,5 +1,7 @@
 package com.hsnay.crowd.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hsnay.crowd.entity.Admin;
 import com.hsnay.crowd.entity.AdminExample;
 import com.hsnay.crowd.exception.LoginFailedException;
@@ -52,5 +54,13 @@ public class AdminServiceImpl implements AdminService {
             throw new LoginFailedException(CrowdConstant.MESSAGE_LOGIN_IN_FAILED);
         }
         return admin;
+    }
+
+    @Override
+    public PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        //pageHelper的非侵入设计 ---对原本查询不需要修改   （mybatis拦截器原理，修改sql然后访问数据库）
+        List<Admin> list = adminMapper.selectAdminByKeyword(keyword);
+        return new PageInfo<>(list);
     }
 }
