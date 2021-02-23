@@ -15,7 +15,8 @@
     <mvc:resources location="/script/" mapping="/script/**"/>
     <mvc:resources location="/ztree/" mapping="/ztree/**"/>
     <mvc:view-controller path="/admin/to/login/page" view-name="admin-login"/>
-    <mvc:view-controller path="/admin/to/main/pape" view-name="admin-main"/>
+    <mvc:view-controller path="/admin/to/main/page" view-name="admin-main"/>
+    <mvc:view-controller path="/admin/to/add/page" view-name="admin-add"/>
 <!--    <mvc:view-controller path="/admin/get/page" view-name="admin-page"/>-->
 <!--    注册拦截器-->
     <mvc:interceptors>
@@ -24,6 +25,8 @@
 <!--            配置不拦截的路径-->
             <mvc:exclude-mapping path="/admin/to/login/page"/>
             <mvc:exclude-mapping path="/admin/do/login"/>
+            <mvc:exclude-mapping path="/bootstrap/**"/>
+            <mvc:exclude-mapping path="/css/**"/>
             <bean class="com.hsnay.crowd.mvc.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

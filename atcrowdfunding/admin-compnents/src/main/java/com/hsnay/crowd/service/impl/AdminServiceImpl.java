@@ -4,14 +4,18 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hsnay.crowd.entity.Admin;
 import com.hsnay.crowd.entity.AdminExample;
+import com.hsnay.crowd.exception.LoginAcctAlreadyUseException;
 import com.hsnay.crowd.exception.LoginFailedException;
 import com.hsnay.crowd.mapper.AdminMapper;
 import com.hsnay.crowd.service.api.AdminService;
 import com.hsnay.crowd.util.CrowdConstant;
 import com.hsnay.crowd.util.CrowdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,8 +28,21 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void saveAdmin(Admin admin) {
-        adminMapper.insert(admin);
-
+        //密码加密
+        String pwsd = CrowdUtil.md5(admin.getUserPswd());
+        //生成时间
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String creatDate = simpleDateFormat.format(date);
+        admin.setUserPswd(pwsd);
+        admin.setCrateTime(creatDate);
+        try {
+            adminMapper.insert(admin);
+        } catch (Exception e) {
+            if(e instanceof DuplicateKeyException){
+                throw new LoginAcctAlreadyUseException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+            }
+        }
     }
 
     @Override
@@ -58,9 +75,15 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         //pageHelper的非侵入设计 ---对原本查询不需要修改   （mybatis拦截器原理，修改sql然后访问数据库）
         List<Admin> list = adminMapper.selectAdminByKeyword(keyword);
+        System.out.println(list);
         return new PageInfo<>(list);
+    }
+
+    @Override
+    public void remove(Integer id) {
+        adminMapper.deleteByPrimaryKey(id);
     }
 }

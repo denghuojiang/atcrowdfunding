@@ -53,7 +53,7 @@ public class JdbcTest {
 
     @Test
     public void testTx(){
-        Admin admin = new Admin(null, "12222", "denghuo333", "灯火酱", "denghuo@qq.com", null);
+        Admin admin = new Admin(null, "denghuo", "denghuo333", "灯火酱", "denghuo@qq.com", null);
         adminService.saveAdmin(admin);
     }
     //空指针异常的消息是null
@@ -65,5 +65,11 @@ public class JdbcTest {
             System.out.println(exception.getMessage());
         }
 
+    }
+    @Test
+    public void addAdmin(){
+        for (int i=1;i<234;i++){
+            adminMapper.insert(new Admin(null,"login_acct"+i,"userpswd"+i,"userName"+i,"emil"+i,null));
+        }
     }
 }

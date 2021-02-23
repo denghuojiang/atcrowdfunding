@@ -2,6 +2,7 @@ package com.hsnay.crowd.mvc.config;
 
 import com.google.gson.Gson;
 import com.hsnay.crowd.exception.AccessForbiddenException;
+import com.hsnay.crowd.exception.LoginAcctAlreadyUseException;
 import com.hsnay.crowd.exception.LoginFailedException;
 import com.hsnay.crowd.util.CrowdConstant;
 import com.hsnay.crowd.util.CrowdUtil;
@@ -22,6 +23,12 @@ public class CrowdExceptionResolver {
     public ModelAndView resolveNullPointerException(Exception exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String viewName = "admin-login";
         return commonResolve(viewName, exception, request, response);
+
+    }
+    @ExceptionHandler(value = {LoginAcctAlreadyUseException.class})
+    public ModelAndView resolveSqlDuplicateKeyException(Exception exception, HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String viewName = "admin-add";
+        return commonResolve(viewName,exception,request,response);
 
     }
 
