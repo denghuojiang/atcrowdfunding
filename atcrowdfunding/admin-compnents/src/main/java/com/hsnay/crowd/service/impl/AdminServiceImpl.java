@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.hsnay.crowd.entity.Admin;
 import com.hsnay.crowd.entity.AdminExample;
 import com.hsnay.crowd.exception.LoginAcctAlreadyUseException;
+import com.hsnay.crowd.exception.LoginAcctAlreadyUseForUpdateException;
 import com.hsnay.crowd.exception.LoginFailedException;
 import com.hsnay.crowd.mapper.AdminMapper;
 import com.hsnay.crowd.service.api.AdminService;
@@ -85,5 +86,21 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void remove(Integer id) {
         adminMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateAdmin(Admin admin) {
+        //有选择的更新对null不更新
+        try {
+            adminMapper.updateByPrimaryKeySelective(admin);
+        } catch (Exception e) {
+            throw new LoginAcctAlreadyUseForUpdateException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+        }
+    }
+
+    @Override
+    public Admin getAdminById(Integer id) {
+        Admin admin = adminMapper.selectByPrimaryKey(id);
+        return admin;
     }
 }

@@ -7,11 +7,13 @@ import com.hsnay.crowd.util.CrowdConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
@@ -66,8 +68,25 @@ public class AdminController {
     @RequestMapping("/admin/save")
     public String adminSave(Admin admin) {
         adminService.saveAdmin(admin);
-        return "redirect:/admin/get/page?pageNum="+Integer.MAX_VALUE;
+        return "redirect:/admin/get/page?pageNum=" + Integer.MAX_VALUE;
     }
 
+    @RequestMapping("/admin/to/edit/page")
+    public String adminToEdit(@RequestParam("adminId") Integer id,
+                              ModelMap modelMap) {
 
+        Admin adminById = adminService.getAdminById(id);
+        System.out.println(adminById);
+        modelMap.addAttribute(CrowdConstant.ATTR_EDIT_ADMIN,adminById);
+        return "admin-edit";
+    }
+
+    @RequestMapping("/admin/update")
+    public String adminEdit(@RequestParam("pageNum") Integer pageNum,
+                            @RequestParam("keyword") String keyword,
+                            Admin admin) {
+
+        adminService.updateAdmin(admin);
+        return "redirect:/admin/get/page?pageNum=" + pageNum + "&keyword=" + keyword;
+    }
 }

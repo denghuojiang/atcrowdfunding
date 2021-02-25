@@ -1,14 +1,17 @@
 package com.hsnay.crowd.mvc.config;
 
 import com.google.gson.Gson;
+import com.hsnay.crowd.entity.Admin;
 import com.hsnay.crowd.exception.AccessForbiddenException;
 import com.hsnay.crowd.exception.LoginAcctAlreadyUseException;
+import com.hsnay.crowd.exception.LoginAcctAlreadyUseForUpdateException;
 import com.hsnay.crowd.exception.LoginFailedException;
 import com.hsnay.crowd.util.CrowdConstant;
 import com.hsnay.crowd.util.CrowdUtil;
 import com.hsnay.crowd.util.ResultEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +31,12 @@ public class CrowdExceptionResolver {
     @ExceptionHandler(value = {LoginAcctAlreadyUseException.class})
     public ModelAndView resolveSqlDuplicateKeyException(Exception exception, HttpServletRequest request,HttpServletResponse response) throws IOException {
         String viewName = "admin-add";
+        return commonResolve(viewName,exception,request,response);
+
+    }
+    @ExceptionHandler(LoginAcctAlreadyUseForUpdateException.class)
+    public ModelAndView resolveLoginAcctAlreadyUseForUpdateExceptionException(Exception exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String viewName = "admin-edit";
         return commonResolve(viewName,exception,request,response);
 
     }
