@@ -40,7 +40,7 @@
             var roleName = $.trim($("#addModal [name=roleName]").val());
             // 2.发送ajax请求
             $.ajax({
-                "url": "role/save.json",
+                "url": "role/save",
                 "type": "post",
                 "data": {
                     "name": roleName
@@ -50,12 +50,14 @@
                     var result = response.result;
                     if (result == "SUCCESS") {
                         layer.msg("操作成功!");
+                        // 重新加载分页
+                        window.pageNum = 999999;
+                        generatePage();
                     }
                     if (result == "FAILED") {
                         layer.msg("操作失败！" + response.message)
                     }
-                    // 重新加载分页
-                    generatePage();
+
                 },
                 "error": function (response) {
                     layer.msg(response.status + " " + response.statusText);
@@ -93,7 +95,7 @@
             var roleName = $("#editModal [name=roleName]").val();
 // ②发送 Ajax 请求执行更新
             $.ajax({
-                "url": "role/update.json",
+                "url": "role/update",
                 "type": "post",
                 "data": {
                     "id": window.roleId,
@@ -124,7 +126,7 @@
             var requestBody = JSON.stringify(window.roleIdArray);
 
             $.ajax({
-                "url": "role/remove/by/role/id/array.json",
+                "url": "role/remove/by/role/id/array",
                 "type": "post",
                 "data": requestBody,
                 "contentType": "application/json;charset=UTF-8",
@@ -156,7 +158,7 @@
             // 创建role对象
             var roleArray = [{
                 roleId: this.id,
-                roleName: roleName,
+                roleName: roleName
             }];
             // 调用函数打开模态框
             showConfirmModel(roleArray);
@@ -320,8 +322,8 @@
     </div>
 </div>
 <%@include file="/WEB-INF/model-role-add.jsp" %>
-<%--<%@include file="/WEB-INF/model-role-edit.jsp" %>--%>
-<%--<%@include file="/WEB-INF/model-role-confirm.jsp" %>--%>
+<%@include file="/WEB-INF/model-role-edit.jsp" %>
+<%@include file="/WEB-INF/model-role-confirm.jsp" %>
 <%--<%@include file="/WEB-INF/modal-role-assign-auth.jsp" %>--%>
 </body>
 </html>

@@ -1,3 +1,22 @@
+// 声明专门的函数显示确认模态框
+function showConfirmModel(roleArray) {
+    // 打开模态框
+    $("#confirmModal").modal("show");
+    // 清除旧数据
+    $("#roleNameDiv").empty();
+    // 在全局变量范围内创建数组来存放角色id
+    window.roleIdArray = [];
+    // 遍历roleArray数组
+    for (var i = 0; i < roleArray.length; i++) {
+        var role = roleArray[i];
+        var roleName = role.roleName;
+        $("#roleNameDiv").append(roleName + "<br />");
+        var roleId = role.roleId;
+        console.log(roleId);
+        window.roleIdArray.push(roleId);
+    }
+}
+
 function generatePage() {
     //获取分页数据
     var pageInfo = getPageInfoRemote();
@@ -52,7 +71,7 @@ function fillTableBody(pageInfo) {
         var roleId = role.id;
         var roleName = role.name;
         var numberTd = "<td>" + (i + 1) + "</td>";
-        var checkboxTd = "<td><input type='checkbox'/></td>";
+        var checkboxTd = "<td><input  id='" + roleId + "' class='itemBox' type='checkbox'/></td>";
         var roleNameTd = "<td>" + roleName + "</td>";
 
         // 通过button标签的id属性把roleId值传递到button按钮的单击响应函数中

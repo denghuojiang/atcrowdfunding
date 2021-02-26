@@ -6,10 +6,9 @@ import com.hsnay.crowd.service.api.RoleService;
 import com.hsnay.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class RoleController {
@@ -31,5 +30,28 @@ public class RoleController {
             e.printStackTrace();
             return ResultEntity.failed(e.getMessage());
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/role/save", method = RequestMethod.POST)
+    public ResultEntity<String> roleSave(Role role) {
+        roleService.saveRole(role);
+
+        return ResultEntity.successWithoutData();
+
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/role/update", method = RequestMethod.POST)
+    public ResultEntity<String> roleUpdate(Role role) {
+        roleService.update(role);
+        return ResultEntity.successWithoutData();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/role/remove/by/role/id/array" ,method = RequestMethod.POST)
+    public ResultEntity<String> roleRemoveByRoleIdArray(@RequestBody List<Integer> roleIdList) {
+        roleService.removeRole(roleIdList);
+        return ResultEntity.successWithoutData();
     }
 }
