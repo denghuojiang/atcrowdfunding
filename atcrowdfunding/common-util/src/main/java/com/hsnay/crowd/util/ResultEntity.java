@@ -11,7 +11,7 @@ public class ResultEntity<T> {
     //结果成功还是失败
     private String result;
     //失败时的错误消息
-    private String massage;
+    private String message;
     //要返回的数据
     private T data;
 
@@ -19,7 +19,7 @@ public class ResultEntity<T> {
     public String toString() {
         return "ResultEntity{" +
                 "result='" + result + '\'' +
-                ", massage='" + massage + '\'' +
+                ", message='" + message + '\'' +
                 ", data='" + data + '\'' +
                 '}';
     }
@@ -32,12 +32,12 @@ public class ResultEntity<T> {
         this.result = result;
     }
 
-    public String getMassage() {
-        return massage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMassage(String massage) {
-        this.massage = massage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {
@@ -48,9 +48,9 @@ public class ResultEntity<T> {
         this.data = data;
     }
 
-    public ResultEntity(String result, String massage, T data) {
+    public ResultEntity(String result, String message, T data) {
         this.result = result;
-        this.massage = massage;
+        this.message = message;
         this.data = data;
     }
 
@@ -65,8 +65,8 @@ public class ResultEntity<T> {
         return new ResultEntity<Type>(SUCCESS, null, data);
     }
 
-    public static <Type> ResultEntity<Type> failed(String massage) {
-        return new ResultEntity<Type>(FAILED, massage, null);
+    public static <Type> ResultEntity<Type> failed(String message) {
+        return new ResultEntity<Type>(FAILED, message, null);
     }
 
 }

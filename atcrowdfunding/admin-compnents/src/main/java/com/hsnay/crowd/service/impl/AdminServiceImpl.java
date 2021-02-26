@@ -67,7 +67,7 @@ public class AdminServiceImpl implements AdminService {
         int index = 0;
         Admin admin = list.get(index);
         String userPswd = admin.getUserPswd();
-        System.out.println(userPswd);
+        //System.out.println(userPswd);
         if (!Objects.equals(CrowdUtil.md5(pwsd), userPswd)) {
             throw new LoginFailedException(CrowdConstant.MESSAGE_LOGIN_IN_FAILED);
         }

@@ -1,10 +1,10 @@
 package crowd;
 
 
+import com.hsnay.crowd.entity.Role;
 import com.hsnay.crowd.mapper.AdminMapper;
 import com.hsnay.crowd.entity.Admin;
-import com.hsnay.crowd.service.api.AdminService;
-import com.hsnay.crowd.service.impl.AdminServiceImpl;
+import com.hsnay.crowd.mapper.RoleMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -25,9 +25,9 @@ public class JdbcTest {
     private DataSource dataSource;
     @Autowired
     private AdminMapper adminMapper;
-
     @Autowired
-    private AdminService adminService;
+    private RoleMapper roleMapper;
+
     @Test
     public void testInsert(){
         Admin admin = new Admin(null, "12345", "root", "灯火酱", "heshinuoi@gmail.com", null);
@@ -54,7 +54,6 @@ public class JdbcTest {
     @Test
     public void testTx(){
         Admin admin = new Admin(null, "denghuo", "denghuo333", "灯火酱", "denghuo@qq.com", null);
-        adminService.saveAdmin(admin);
     }
     //空指针异常的消息是null
     @Test
@@ -70,6 +69,14 @@ public class JdbcTest {
     public void addAdmin(){
         for (int i=1;i<234;i++){
             adminMapper.insert(new Admin(null,"login_acct"+i,"userpswd"+i,"userName"+i,"emil"+i,null));
+        }
+    }
+
+    @Test
+    public void addRole(){
+        for(int i= 2;i<200;i++){
+            Role role = new Role(null, "role"+i);
+            roleMapper.insert(role);
         }
     }
 }
