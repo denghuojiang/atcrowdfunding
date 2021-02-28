@@ -133,12 +133,12 @@
                 "dataType": "json",
                 "success": function (response) {
                     var result = response.result;
-                    if (result == "SUCCESS") {
+                    if (result === "SUCCESS") {
                         layer.msg("操作成功！");
 // 重新加载分页数据
                         generatePage();
                     }
-                    if (result == "FAILED") {
+                    if (result === "FAILED") {
                         layer.msg("操作失败！" + response.message);
                     }
                 },

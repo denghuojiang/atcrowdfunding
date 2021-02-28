@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/admin_webui_war/">
+    <base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/">
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="layer/layer.js"></script>
 <%--    静态资源过滤默认映射到js文件下--%>

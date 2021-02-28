@@ -29,7 +29,7 @@ function generatePage() {
 function getPageInfoRemote() {
     var pageInfo = null;
     var ajaxResult = $.ajax({
-        "url": "/admin_webui_war/role/get/page",
+        "url": "role/get/page",
         "type": "post",
         "data": {
             "pageNum": window.pageNum,

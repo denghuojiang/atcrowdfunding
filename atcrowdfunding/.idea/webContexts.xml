@@ -4,6 +4,8 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/admin-webui/src/main/webapp/WEB-INF/admin-login.jsp" value="file://$PROJECT_DIR$/admin-webui/src/main/webapp/WEB-INF" />
+        <entry key="file://$PROJECT_DIR$/admin-webui/src/main/webapp/WEB-INF/menu-page.jsp" value="file://$PROJECT_DIR$/admin-webui/src/main/webapp/WEB-INF" />
+        <entry key="file://$PROJECT_DIR$/admin-webui/src/main/webapp/WEB-INF/role-page.jsp" value="file://$PROJECT_DIR$/admin-webui/src/main/webapp/WEB-INF" />
       </map>
     </option>
   </component>
