@@ -20,4 +20,6 @@ public interface AdminService {
     void updateAdmin(Admin admin);
 
     Admin getAdminById(Integer id);
+
+    void saveAdminRoleRelationShip(Integer adminId, List<Integer> roleIdList);
 }

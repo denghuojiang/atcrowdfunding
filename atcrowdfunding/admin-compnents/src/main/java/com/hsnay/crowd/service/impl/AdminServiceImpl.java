@@ -103,4 +103,14 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = adminMapper.selectByPrimaryKey(id);
         return admin;
     }
+
+    @Override
+    public void saveAdminRoleRelationShip(Integer adminId, List<Integer> roleIdList) {
+        //删除旧的关系
+        adminMapper.deleteOldRelationShip(adminId);
+        //更新
+        if(roleIdList != null&& roleIdList.size()>0){
+            adminMapper.insertNewRelationShip(adminId,roleIdList);
+        }
+    }
 }
