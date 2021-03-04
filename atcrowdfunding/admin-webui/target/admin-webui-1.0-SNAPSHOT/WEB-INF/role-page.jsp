@@ -237,7 +237,7 @@
             }
             requestBody = JSON.stringify(requestBody);
             $.ajax({
-                "url": "assign/do/role/assign/auth.json",
+                "url": "assign/do/role/assign/auth",
                 "type": "post",
                 "data": requestBody,
                 "contentType": "application/json;charset=UTF-8",
@@ -324,7 +324,7 @@
 <%@include file="/WEB-INF/model-role-add.jsp" %>
 <%@include file="/WEB-INF/model-role-edit.jsp" %>
 <%@include file="/WEB-INF/model-role-confirm.jsp" %>
-<%--<%@include file="/WEB-INF/modal-role-assign-auth.jsp" %>--%>
+<%@include file="/WEB-INF/modal-role-assign-auth.jsp" %>
 </body>
 </html>
 

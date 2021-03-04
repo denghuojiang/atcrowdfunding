@@ -22,17 +22,17 @@
     <mvc:view-controller path="/menu/to/page" view-name="menu-page"/>
 <!--    <mvc:view-controller path="/admin/get/page" view-name="admin-page"/>-->
 <!--    注册拦截器-->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-<!--            配置不拦截的路径-->
-            <mvc:exclude-mapping path="/admin/to/login/page"/>
-            <mvc:exclude-mapping path="/admin/do/login"/>
-            <mvc:exclude-mapping path="/bootstrap/**"/>
-            <mvc:exclude-mapping path="/css/**"/>
-            <bean class="com.hsnay.crowd.mvc.interceptor.LoginInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--&lt;!&ndash;            配置不拦截的路径&ndash;&gt;-->
+<!--            <mvc:exclude-mapping path="/admin/to/login/page"/>-->
+<!--            <mvc:exclude-mapping path="/admin/do/login"/>-->
+<!--            <mvc:exclude-mapping path="/bootstrap/**"/>-->
+<!--            <mvc:exclude-mapping path="/css/**"/>-->
+<!--            <bean class="com.hsnay.crowd.mvc.interceptor.LoginInterceptor"/>-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>

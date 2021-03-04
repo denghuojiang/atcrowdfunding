@@ -1,3 +1,79 @@
+// 声明专门的函数用来分配Auth的模态框中显示Auth的树形结构数据
+function fillAuthTree() {
+    // 1.发送 Ajax 请求查询 Auth 数据
+    var ajaxReturn = $.ajax({
+        "url":"assign/get/all/auth",
+        "type":"post",
+        "dataType":"json",
+        "async":false
+    });
+    if(ajaxReturn.status != 200) {
+        layer.msg("请求处理出错响应状态码 是 ： "+ajaxReturn.status+" 说 明 是 ："+ajaxReturn.statusText);
+        return ;
+    }
+    // 2.从响应结果中获取 Auth 的 JSON 数据
+    // 从服务器端查询到的 list 不需要组装成树形结构，这里我们交给 zTree 去组装
+    var authList = ajaxReturn.responseJSON.data;
+    // 3.准备对 zTree 进行设置的 JSON 对象
+    var setting = {
+        "data": {
+            "simpleData": {
+                // 开启简单 JSON 功能
+                "enable": true,
+                // 使用 categoryId 属性关联父节点，不用默认的 pId 了
+                "pIdKey": "categoryId"
+            },
+            "key": {
+                // 使用 title 属性显示节点名称，不用默认的 name 作为属性名了
+                "name": "title"
+            }
+        },
+        "check": {
+            "enable": true
+        }
+    };
+    // 4.生成树形结构
+    // <ul id="authTreeDemo" class="ztree"></ul>
+    $.fn.zTree.init($("#authTreeDemo"), setting, authList);
+    // 获取 zTreeObj 对象
+    var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+    // 调用 zTreeObj 对象的方法，把节点展开
+    zTreeObj.expandAll(true);
+
+    // 5.查询已分配的 Auth 的 id 组成的数组
+    ajaxReturn = $.ajax({
+        "url":"assign/get/assigned/auth/id/by/role/id",
+        "type":"post",
+        "data":{
+            "roleId":window.roleId
+        },
+        "dataType":"json",
+        "async":false
+    });
+    if(ajaxReturn.status != 200) {
+        layer.msg("请求处理出错!响应状态码是："+ajaxReturn.status+"说明是："+ajaxReturn.statusText);
+        return ;
+    }
+    // 从响应结果中获取 authIdArray
+    var authIdArray = ajaxReturn.responseJSON.data;
+    // 6.根据 authIdArray 把树形结构中对应的节点勾选上
+    // ①遍历 authIdArray
+    for(var i = 0; i < authIdArray.length; i++) {
+        var authId = authIdArray[i];
+        // ②根据 id 查询树形结构中对应的节点
+        var treeNode = zTreeObj.getNodeByParam("id", authId);
+        // ③将 treeNode 设置为被勾选
+        // checked 设置为 true 表示节点勾选
+        var checked = true;
+        // checkTypeFlag 设置为 false，表示不“联动”，不联动是为了避免把不该勾选的勾选上
+        var checkTypeFlag = false;
+        // 执行
+        zTreeObj.checkNode(treeNode, checked, checkTypeFlag);
+    }
+}
+
+
+
 // 声明专门的函数显示确认模态框
 function showConfirmModel(roleArray) {
     // 打开模态框
@@ -97,12 +173,12 @@ function generateNavigator(pageInfo) {
         "prev_text": "上一页",
         "next_text": "下一页"
     }
-    $("#Pagination").pagination(totalRecord,properties);
+    $("#Pagination").pagination(totalRecord, properties);
 }
 
 //翻页时回调函数
 function pageinatonCallBack(pageIndex, JQuery) {
-    window.pageNum = pageIndex+1;
+    window.pageNum = pageIndex + 1;
     generatePage();
     return false;
 }
