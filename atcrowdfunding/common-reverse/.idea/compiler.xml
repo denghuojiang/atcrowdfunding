@@ -6,12 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="admin-webui" />
-        <module name="admin-entity" />
-        <module name="common-util" />
-        <module name="common-reverse" />
-        <module name="admin-compnents" />
+        <module name="commons-reverse" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="commons-reverse" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
