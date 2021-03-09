@@ -3,6 +3,7 @@ package com.hsnay.crowd.test;
 import com.hsany.crowd.CrowdMainClass;
 
 import com.hsany.crowd.mapper.MemberPOMapper;
+
 import com.hsnay.crowd.entity.po.MemberPO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
