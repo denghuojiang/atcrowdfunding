@@ -1,0 +1,13 @@
+server:
+  port: 3000
+
+spring:
+  redis:
+    host: 1.15.95.58
+    password: denghuo666
+  application:
+    name: atguigu-crowd-redis
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka

@@ -6,7 +6,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     name: mydb
-    url: jdbc:mysql://localhost:3306/project_crowd?serverTimeZone=UTC
+    url: jdbc:mysql://localhost:3306/project_crowd?serverTimezone=UTC
     username: root
     password: root
 eureka:
@@ -15,3 +15,7 @@ eureka:
       defaultZone: http://localhost:1000/eureka
 mybatis:
   mapper-locations: classpath*:/mybatis/mapper/*Mapper.xml
+  # 由于项目刚启动第一次进行redis操作时会比较慢，可能被ribbon认为是超时报错，因此通过下面的配置延长ribbon超时的时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000

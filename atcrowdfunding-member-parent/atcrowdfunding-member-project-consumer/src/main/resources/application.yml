@@ -1,0 +1,30 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: crowd-project
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  redis:
+    host: 1.15.95.58
+    password: denghuo666
+  session:
+    store-type: redis
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka/
+
+aliyun:
+  oss:
+    access-key-id: LTAI4G8FjK7WT8nDQzDWcuxv
+    access-key-secret: 5zAvJK42i5PFumWI4NZ1CiW2nE549n
+    bucket-domain: http://denghuo7.oss-cn-beijing.aliyuncs.com
+    bucket-name: denghuo7
+    end-point: oss-cn-beijing.aliyuncs.com
+
+# 由于项目刚启动第一次进行redis操作时会比较慢，可能被ribbon认为是超时报错，因此通过下面的配置延长ribbon超时的时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000

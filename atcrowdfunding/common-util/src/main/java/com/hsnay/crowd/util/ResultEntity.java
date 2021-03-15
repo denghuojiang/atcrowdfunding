@@ -6,8 +6,8 @@ package com.hsnay.crowd.util;
  * @param <T>
  */
 public class ResultEntity<T> {
-    private static final String SUCCESS = "SUCCESS";
-    private static final String FAILED = "FAILED";
+    public static final String SUCCESS = "SUCCESS";
+    public static final String FAILED = "FAILED";
     //结果成功还是失败
     private String result;
     //失败时的错误消息
