@@ -1,0 +1,32 @@
+server:
+  port: 7000
+spring:
+  application:
+    name: crowd-pay
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  redis:
+    host: 1.15.95.58
+    password: denghuo666
+  session:
+    store-type: redis
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka/
+
+ali:
+  pay:
+    ali-pay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqNg6CNBQH5C0XCBt+FhkdN769M/GrIEW16PEpRGK5MkNc0i2zJMixpIhqyTqXZ/Gl7WDQxdEyXdrwCfsQxtwhPiTYro5nY9Wp/v1O96mwYrUp7JNsP3k5aU966n2vd4ZXV0F9MXuNEzNNHnkLrtWvnqzANUqE4a+b1CQh16ti2iNvhTMhh1BIGKs4771EAf63QVdLUFw+J/rCoduPFJImO2Osg2v6ZCSIuMV7d34nFv6rpLdgdHmjBVgxUKTY3fWCwqqYhuiKtIqqslIDIeLjIQgaLo4Ugx5+CA7oCUpJKlooJATGggUYfrYWD12R6AVoT5gUkfgBPcl7IO9MUZcbwIDAQAB
+    app-id: 2021000117623122
+    charset: utf-8
+    gateway-url: https://openapi.alipaydev.com/gateway.do
+    merchant-private-key: MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDbI1Mwn4MFWPi57THVEgTx7PdD12yrP9lLTzzNlKjgDV6NIvPjWl1aNRFDmwhWBO/PoJVrVDwpjYg+0Y/xicXjxYApN8eYqdnGe8c/cZ+XBToatn7QbgbLtRXMFmwsj6vDY0zLv9ktS/+DosnUopXwqWQfxcsm6H2/Zi7lv8gR/MVio6gO1low4pAY8YCUvN8vtIhLWRZv6fmsJo/E99lg+TwN0saHSHf8Mop3ejmdlHC3/VmvlLhV1En6DxwEquQKri9RuZQ3A9cMtvbpyRVtNw/FGqnWbhF3/rkQOawAzF7qEqq83Q3GrObZz3ZTRZ3xWse3Sl4rM1tX6t2245ttAgMBAAECggEBAKiY9wozz2Qv3b1+hpZ99JwFSwBBH/RpfU75ubgZpgwrfRFtUOMcxTIAHjY7cyBrT+4YiJ05A8icgbSDGxIkg8IIU+BicAg+tbSFyvg+/R/9/4RJ4CuQW14jBpAsuDFYoDgFkDI6emblT8MBXfNg26d7S/M+BFz9BrJZdb+B2/YpbWRuuFZrILvCLwPQqoQ3omBZ1leO2FHVNy1wQguBkX9yh5RjO5mHD8xQhcEa+gkzpRaWyL6XZ/C3NrwGnARxHdVNzWRjKAE5r7PgAjND/17WzuH38Qwgj143ft8aXefpndbUiv1Q0xC++SOV6Nc7FOPEuxleT/2Yl2cDbAlH8kECgYEA7lFd42x0A/RAz7meaSC5RFG3fbxatXilPWF0z9fLlf+J6CTCpaNTCmCJrvWhCgji0OVKbEJEkd79nJ022LsDUnynYJ1YbMGv8FqDo6pYiZMaU/Y4byIit63gBfB0Wu3dCYRX3FMYgAH1PhvBt3auDDjTs4MIQxpFp9T1OxdVq3kCgYEA62WneAZGULfzfVgGdzGNrhl2CU1xD+Fg0TI3FqKcor6e59Vj1y/MPE/lkdRbxkULjzg2TAcRlkCUDCgq6JBaajHRODy9ITi9FbZ05B9z3Q/T246C7RMGmTrJobJAGOtV50WRsUViyUjyTQFxRAJbNiKHwT42YXn7X72YrW8bvpUCgYEAuf5u1Cu0b9GVM4mehFWxwgw0tMDn2nGKJNmGnR/CGBMTwkXOVA+fo52sVwwE3xwISRhqeQtPELmEHVLll0h9U0dOKi0i8d5IPcGms3kjGFviVFz5tmJhzhC5omkDpmO1+tN67s07dcwRZqOrEFBjjc5cCuHc9OHwMwgVTETt66ECgYBsp/ice3D7k12OTxJ09GespE4KzzdQGD1jcuVgymC48npREvvJ+WMxt8OFA9v08iv6yPyvLVgd3eM4lVXxEajaefJUHh1C93i4TAc6wZXuxX6KSwb+PZj/I9asj6XsmryFS2SLyjZmKQjHKNJKjTfjDh9RwNDDP9YbhF20OKQ63QKBgQCKoKPKbKvX+ACrRT2C/5UYZoiWhZpcD12FSs41qdzRnqaMcOPgyva8nOyWHRCPwnqzcPOuMxGIJS+ui/kTXdPEy+F+ars9zREnyZcd9Z/otrqpFx+fLvTYS/I+RhDjKOH1w1vqlEg/YBwrsYJmPIYcAEUMA4vKthUe20UmnH786Q==
+    notify-url: http://3ve5mn.natappfree.cc/pay/notify
+    return-url: http://localhost/pay/return
+    sign-type: RSA2
+# 由于项目刚启动第一次进行redis操作时会比较慢，可能被ribbon认为是超时报错，因此通过下面的配置延长ribbon超时的时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
