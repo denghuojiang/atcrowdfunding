@@ -18,8 +18,8 @@ eureka:
 
 aliyun:
   oss:
-    access-key-id: LTAI4G8FjK7WT8nDQzDWcuxv
-    access-key-secret: 5zAvJK42i5PFumWI4NZ1CiW2nE549n
+    access-key-id:
+    access-key-secret: 
     bucket-domain: http://denghuo7.oss-cn-beijing.aliyuncs.com
     bucket-name: denghuo7
     end-point: oss-cn-beijing.aliyuncs.com
